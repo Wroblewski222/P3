@@ -20,16 +20,55 @@ Ejercicios básicos
    * Inserte una gŕafica donde, en un *subplot*, se vea con claridad la señal temporal de un segmento de
      unos 30 ms de un fonema sonoro y su periodo de pitch; y, en otro *subplot*, se vea con claridad la
 	 autocorrelación de la señal y la posición del primer máximo secundario.
+	<img width="506" height="73" alt="imagen" src="https://github.com/user-attachments/assets/1e198ef6-dc9c-4cca-9509-17bfd548fe30" />
+	<img width="590" height="357" alt="imagen" src="https://github.com/user-attachments/assets/1ef9a9e4-a33b-4d4c-ba68-241d36d7fa7a" />
+
+
 
 	 NOTA: es más que probable que tenga que usar Python, Octave/MATLAB u otro programa semejante para
 	 hacerlo. Se valorará la utilización de la biblioteca matplotlib de Python.
 
    * Determine el mejor candidato para el periodo de pitch localizando el primer máximo secundario de la
      autocorrelación. Inserte a continuación el código correspondiente.
+     - Para determinar el mejor candidato para el periodo de pitch, se calcula la autocorrelación de la señal en cada ventana. El pico principal de la autocorrelación aparece en lag = 0, por lo que se busca el primer máximo secundario dentro del intervalo definido por npitch_min y npitch_max (correspondiente al rango permitido de periodos de pitch).
+El lag asociado al máximo secundario se toma como estimación del periodo de pitch, y la frecuencia fundamental se obtiene como:
+f0=Fs/lag
+
+	parte de codigo de pitch_analyzer.cpp : 
+
+	iRMax = std::max_element(iR + npitch_min, iR + npitch_max);
+	unsigned int lag = iRMax - r.begin();
+	float f0 = (float) samplingFreq/(float) lag;
+
 
    * Implemente la regla de decisión sonoro o sordo e inserte el código correspondiente.
+  - Para decidir si una trama es sonora (voiced) o sorda (unvoiced), se utilizan tres medidas extraídas de la autocorrelación:
+**pot**: potencia de la trama (en dB)
+**r1norm**: autocorrelación normalizada en lag = 1
+**rmaxnorm**: valor normalizado de la autocorrelación en el máximo secundario
+Se consideran tramas sordas cuando la energía es baja o no existe un pico de autocorrelación suficientemente claro. En caso contrario, la trama se clasifica como sonora.
+
+parte de codigo de pitch_analyzer.cpp : 
+
+bool PitchAnalyzer::unvoiced(float pot, float r1norm, float rmaxnorm) const {
+  // Potencia muy baja = sordo
+  if (pot < -20.0F)
+    return true;
+  // Primera autocorrelación muy baja = sordo
+  if (r1norm < 0.4F)
+    return true;
+  // Max autocorrelación secundaria muy baja = sordo
+  if (rmaxnorm < this->umaxnorm)
+    return true;
+  return false;
+}
+
 
    * Puede serle útil seguir las instrucciones contenidas en el documento adjunto `código.pdf`.
+<img width="600" height="86" alt="imagen" src="https://github.com/user-attachments/assets/7c754b84-8db3-4933-8583-5de2b153d4ad" />
+<img width="601" height="260" alt="imagen" src="https://github.com/user-attachments/assets/bf8510db-44f7-4fbb-af67-c758697c19ec" />
+
+
 
 - Una vez completados los puntos anteriores, dispondrá de una primera versión del estimador de pitch. El 
   resto del trabajo consiste, básicamente, en obtener las mejores prestaciones posibles con él.
