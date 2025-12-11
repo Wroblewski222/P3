@@ -20,8 +20,8 @@ Ejercicios básicos
    * Inserte una gŕafica donde, en un *subplot*, se vea con claridad la señal temporal de un segmento de
      unos 30 ms de un fonema sonoro y su periodo de pitch; y, en otro *subplot*, se vea con claridad la
 	 autocorrelación de la señal y la posición del primer máximo secundario.
-	<img width="506" height="73" alt="imagen" src="https://github.com/user-attachments/assets/1e198ef6-dc9c-4cca-9509-17bfd548fe30" />
-	<img width="590" height="357" alt="imagen" src="https://github.com/user-attachments/assets/1ef9a9e4-a33b-4d4c-ba68-241d36d7fa7a" />
+		<img width="506" height="73" alt="imagen" src="https://github.com/user-attachments/assets/1e198ef6-dc9c-4cca-9509-17bfd548fe30" />
+		<img width="590" height="357" alt="imagen" src="https://github.com/user-attachments/assets/1ef9a9e4-a33b-4d4c-ba68-241d36d7fa7a" />
 
 
 
@@ -30,7 +30,8 @@ Ejercicios básicos
 
    * Determine el mejor candidato para el periodo de pitch localizando el primer máximo secundario de la
      autocorrelación. Inserte a continuación el código correspondiente.
-     - Para determinar el mejor candidato para el periodo de pitch, se calcula la autocorrelación de la señal en cada ventana. El pico principal de la autocorrelación aparece en lag = 0, por lo que se busca el primer máximo secundario dentro del intervalo definido por npitch_min y npitch_max (correspondiente al rango permitido de periodos de pitch).
+
+Para determinar el mejor candidato para el periodo de pitch, se calcula la autocorrelación de la señal en cada ventana. El pico principal de la autocorrelación aparece en lag = 0, por lo que se busca el primer máximo secundario dentro del intervalo definido por npitch_min y npitch_max (correspondiente al rango permitido de periodos de pitch).
 El lag asociado al máximo secundario se toma como estimación del periodo de pitch, y la frecuencia fundamental se obtiene como:
 f0=Fs/lag
 
@@ -42,6 +43,7 @@ f0=Fs/lag
 
 
    * Implemente la regla de decisión sonoro o sordo e inserte el código correspondiente.
+
   - Para decidir si una trama es sonora (voiced) o sorda (unvoiced), se utilizan tres medidas extraídas de la autocorrelación:
 **pot**: potencia de la trama (en dB)
 **r1norm**: autocorrelación normalizada en lag = 1
@@ -65,8 +67,8 @@ bool PitchAnalyzer::unvoiced(float pot, float r1norm, float rmaxnorm) const {
 
 
    * Puede serle útil seguir las instrucciones contenidas en el documento adjunto `código.pdf`.
-<img width="600" height="86" alt="imagen" src="https://github.com/user-attachments/assets/7c754b84-8db3-4933-8583-5de2b153d4ad" />
-<img width="601" height="260" alt="imagen" src="https://github.com/user-attachments/assets/bf8510db-44f7-4fbb-af67-c758697c19ec" />
+	<img width="600" height="86" alt="imagen" src="https://github.com/user-attachments/assets/7c754b84-8db3-4933-8583-5de2b153d4ad" />
+	<img width="601" height="260" alt="imagen" src="https://github.com/user-attachments/assets/bf8510db-44f7-4fbb-af67-c758697c19ec" />
 
 
 
@@ -96,6 +98,8 @@ bool PitchAnalyzer::unvoiced(float pot, float r1norm, float rmaxnorm) const {
   * Optimice los parámetros de su sistema de estimación de pitch e inserte una tabla con las tasas de error
     y el *score* TOTAL proporcionados por `pitch_evaluate` en la evaluación de la base de datos 
 	`pitch_db/train`..
+	<img width="439" height="149" alt="imagen" src="https://github.com/user-attachments/assets/c1ca5d4a-0ffa-43ce-a38d-6a84e627b85d" />
+
 
 Ejercicios de ampliación
 ------------------------
