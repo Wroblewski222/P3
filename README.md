@@ -44,7 +44,8 @@ f0=Fs/lag
 
    * Implemente la regla de decisión sonoro o sordo e inserte el código correspondiente.
 
-  - Para decidir si una trama es sonora (voiced) o sorda (unvoiced), se utilizan tres medidas extraídas de la autocorrelación:
+	Para decidir si una trama es sonora (voiced) o sorda (unvoiced), se utilizan tres medidas extraídas de la autocorrelación:
+	
 **pot**: potencia de la trama (en dB)
 **r1norm**: autocorrelación normalizada en lag = 1
 **rmaxnorm**: valor normalizado de la autocorrelación en el máximo secundario
