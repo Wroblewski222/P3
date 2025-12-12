@@ -88,6 +88,7 @@ bool PitchAnalyzer::unvoiced(float pot, float r1norm, float rmaxnorm) const {
 
 	    Recuerde configurar los paneles de datos para que el desplazamiento de ventana sea el adecuado, que
 		en esta práctica es de 15 ms.
+
 		<img width="763" height="360" alt="imagen" src="https://github.com/user-attachments/assets/285bd5fc-ef13-4c15-9d2f-039a80fade7b" />
 
 
