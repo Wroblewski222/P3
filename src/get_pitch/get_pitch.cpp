@@ -17,23 +17,31 @@ using namespace std;
 using namespace upc;
 
 static const char USAGE[] = R"(
-get_pitch - Pitch Estimator 
+get_pitch - Pitch Estimator
 
 Usage:
-    get_pitch [options] <input-wav> <output-txt>
-    get_pitch (-h | --help)
-    get_pitch --version
+  get_pitch [options] <input-wav> <output-txt>
+  get_pitch (-h | --help)
+  get_pitch --version
 
 Options:
-    -h, --help  Show this screen
-    --version   Show the version of the project
+  -m REAL, --medfilt=REAL        Longitud filtro de mediana. [default: 1]
+  -c REAL, --clipmult=REAL       Valor de clipping. [default: 0.0075]
+  -r REAL, --umbral_rmax=REAL    Umbral rmaxnorm. [default: 0.5]
+  -1 REAL, --umbral_r1=REAL      Umbral r1norm=r[1]/r[0]. [default: 0.55]
+  -l REAL, --umbral_lag=REAL     Umbral autocorrelación normalizada. [default: 0.4]
+  -z REAL, --umbral_zcr=REAL     Umbral ZCR. [default: 30]
+
+  -h, --help                     Show this screen
+  --version                      Show the version of the project
 
 Arguments:
-    input-wav   Wave file with the audio signal
-    output-txt  Output file: ASCII file with the result of the estimation:
-                    - One line per frame with the estimated f0
-                    - If considered unvoiced, f0 must be set to f0 = 0
+  input-wav   Wave file with the audio signal
+  output-txt  Output file: ASCII file with the result of the estimation:
+                - One line per frame with the estimated f0
+                - If considered unvoiced, f0 must be set to f0 = 0
 )";
+
 
 int main(int argc, const char *argv[]) {
 	/// \TODO 
@@ -46,6 +54,7 @@ int main(int argc, const char *argv[]) {
 
 	std::string input_wav = args["<input-wav>"].asString();
 	std::string output_txt = args["<output-txt>"].asString();
+  float umaxnorm = stof(args["--umaxnorm"].asString());
 
   // Read input sound file
   unsigned int rate;
@@ -59,7 +68,7 @@ int main(int argc, const char *argv[]) {
   int n_shift = rate * FRAME_SHIFT;
 
   // Define analyzer
-  PitchAnalyzer analyzer(n_len, rate, PitchAnalyzer::RECT, 50, 500);
+  PitchAnalyzer analyzer(n_len, rate, PitchAnalyzer::RECT, 50, 500, umaxnorm);
 
   /// \TODO
   /// Preprocess the input signal in order to ease pitch estimation. For instance,
