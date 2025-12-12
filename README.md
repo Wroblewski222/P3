@@ -87,6 +87,8 @@ bool PitchAnalyzer::unvoiced(float pot, float r1norm, float rmaxnorm) const {
 
 	    Recuerde configurar los paneles de datos para que el desplazamiento de ventana sea el adecuado, que
 		en esta práctica es de 15 ms.
+		<img width="763" height="360" alt="imagen" src="https://github.com/user-attachments/assets/285bd5fc-ef13-4c15-9d2f-039a80fade7b" />
+
 
       - Use el estimador de pitch implementado en el programa `wavesurfer` en una señal de prueba y compare
 	    su resultado con el obtenido por la mejor versión de su propio sistema.  Inserte una gráfica
@@ -98,7 +100,8 @@ bool PitchAnalyzer::unvoiced(float pot, float r1norm, float rmaxnorm) const {
   * Optimice los parámetros de su sistema de estimación de pitch e inserte una tabla con las tasas de error
     y el *score* TOTAL proporcionados por `pitch_evaluate` en la evaluación de la base de datos 
 	`pitch_db/train`..
-	<img width="439" height="149" alt="imagen" src="https://github.com/user-attachments/assets/c1ca5d4a-0ffa-43ce-a38d-6a84e627b85d" />
+	<img width="442" height="203" alt="imagen" src="https://github.com/user-attachments/assets/cfbc126c-d022-43bc-aaa0-fa04e24fb597" />
+
 
 
 Ejercicios de ampliación
